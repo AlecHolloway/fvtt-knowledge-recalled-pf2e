@@ -1,24 +1,27 @@
-export class NPCActor extends Actor {
+export class KnowledgeRecalledActor {
    constructor(data)
    {
-      super(data);
-      // There are a few good places to query data. The first is on the main actor and then under system.
-      // under items there are a lot of things as well. Spells, melee, weapons, etc.
-     // this.name = data.actor.name;
-      this.actorID = data.actorID;
+      this.actorID = data.id;
       this.img = data.img;
       this.name = data.name;
+      this.visibility = false;
+      this.level = data.system.details.level.value;
+      this.immunities = data.system.traits.di?.value || [];
+      this.resistances = data.system.traits.dr?.value || [];
+      this.weaknesses = data.weaknesses;
+      this.type = data.type;
+      this.fortitudeSave = data.saves.fortitude.dc.value;
+      this.reflexSave = data.saves.reflex.dc.value;
+      this.willSave = data.saves.will.dc.value;
    }
 
-      //this.actorID = data.actorID;
-     // this.level = data.data.details.level.value;
-     // this.description.value = data.actor.system.details.publicNotese;
-     // this.actorImg = data.actor.img;
-     // this.traits.value = data.data.details.race.value;
+
+
+
       //this.armorClass.value = data.attributes.ac.value;
      // this.armorClass.beforeDC = data.attributes.dex.mod;
      // this.armorClass.afterDC = armorClass.beforeDC;
-      //this.fortitudeSave.value = data.actor.system.saves.fortitude;
+
      // this.fortitudeSave.beforeDC = data.attributes.con.mod;
      // this.fortitudeSave.afterDC = fortitudeSave.beforeDC;
     //  this.reflexSave.value = data.saves.ref.value;
@@ -27,18 +30,8 @@ export class NPCActor extends Actor {
       //this.willSave.value = data.saves.will.value;
       //this.willSave.beforeDC = data.attributes.wis.mod;
       //this.willSave.afterDC = willSave.beforeDC;
-      //this.immunities.value = data.traits.di.value;
-      //this.resistances.value = data.traits.dr.value;
-     //this.weaknesses.value = data.traits.dv.value;
 
 
-
-
-   // baseCharacterInfo = {
-   //    name: "",
-   //    actorImg: "",
-   //    visibility: false
-   // }
    // rarity = {
    //    value: "",
    //    visibility: false
@@ -100,20 +93,23 @@ export class NPCActor extends Actor {
   //     ]
   //  }
   //
-  //  getBaseCharacterInfo()
-  //  {
-  //     // designed to read the characters queried from game.actors.get(actorID)
-  //     this.name = this.data.name;
-  //     this.baseCharacterInfo.actorImg = this.data.img;
-  //     this.rarity.value = this.data.system.traits.rarity;
-  //     this.armorClass.value = this.data.system.attributes.ac;
-  //  }
-  //  getSaves()
-  //  {
-  //     this.fortitudeSave.value = this.data.saves.fortitude;
-  //     this.reflexSave.value = this.data.saves.reflex;
-  //     this.willSave.value = this.data.saves.will;
-  //  }
+   getBaseCharacterInfo()
+   {
+      return {
+         name: this.name,
+         actorImg: this.img,
+         visibility: false
+      }
+   };
+   getSaves()
+   {
+      return {
+         fortitude: this.fortitudeSave,
+         reflex: this.reflexSave,
+         will: this.willSave
+      }
+
+   }
   //  getAttacks()
   //  {
   //     let actionsLength = this.data.system.actions.length;

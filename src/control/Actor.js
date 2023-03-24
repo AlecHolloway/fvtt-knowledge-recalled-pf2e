@@ -1,4 +1,4 @@
-import {NPCActor} from "../models/ActorModel.js";
+import {KnowledgeRecalledActor} from "../models/ActorModel.js";
 
 
 //export async function getActorFromID(actorID) {
@@ -19,14 +19,16 @@ export async function getAllActorsFromEncounters() {
    return combatants.map((combatant) =>
    {
       const foundryActor = combatant.actor;
-      return createNPCActor(foundryActor);
+      console.log("Foundry Actor: ", foundryActor)
+      return KnowledgeRecalledActorFactory(foundryActor);
    });
 }
 
-function createNPCActor(foundryNPC) {
-   return new NPCActor(foundryNPC);
-}
 
+
+function KnowledgeRecalledActorFactory(foundryNPC) {
+   return new KnowledgeRecalledActor(foundryNPC);
+}
 /*
    export function getNPCGlobalActor() {
 
