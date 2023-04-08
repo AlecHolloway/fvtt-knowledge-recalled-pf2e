@@ -3,7 +3,7 @@ on:
    workflow_dispatch:
    push:
       branches:
-         - ci-analysis
+         - main
    pull_request:
       types: [opened, synchronize, reopened]
 jobs:
